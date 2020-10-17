@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Header from './components/header';
 import Todo from './components/todo';
 import List from './components/list';
+import axios from 'axios';
 
 const initialFormData = Object.freeze({
   title: "",
@@ -9,6 +10,15 @@ const initialFormData = Object.freeze({
   done: false,
   id : Math.ceil(Math.random() * 10000)
 });
+
+async function makeGetRequest(url) {
+
+  let res = await axios.get(url);
+
+  let data = res.data;
+
+  return data;
+}
 
 function App() {
 
@@ -22,7 +32,9 @@ function App() {
   }, []);
 
   const fetchTodos = () => {
-    console.log("This is where I am supposed to fetch Todos from backend API");  
+    makeGetRequest('http://localhost:3000/api/v1/todos')
+    .then(( data ) => console.log(data))
+    .catch((err) => console.log(err))
   }
 
   return (

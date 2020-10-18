@@ -27,7 +27,6 @@ function App() {
   const [todos, addTodos] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect Hooks in use");
     fetchTodos();
   }, []);
 

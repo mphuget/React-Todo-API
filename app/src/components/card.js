@@ -6,10 +6,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+import axios from 'axios';
 
 import "../App.css";
-  
+
 const useStyles = makeStyles({
     root: {
         width: 100,
@@ -27,6 +27,13 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
   });
+
+  async function makeDeleteRequest(url) {
+
+    let res = await axios.delete(url);
+  
+    return res;
+  }
 
 export default function CardTodo({todo, todos, setTodos}) {
 
@@ -52,6 +59,10 @@ export default function CardTodo({todo, todos, setTodos}) {
         // ... submit to API or something
         setTodos(todos.filter((el) => el.id !== todo.id));
 
+        makeDeleteRequest("http://localhost:3000/api/v1/todo/" + todo._id)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err)); 
+        
     };
 
     return(

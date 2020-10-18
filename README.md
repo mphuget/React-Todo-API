@@ -1,3 +1,3 @@
 # React-Todo-API
 
-Chapter 08: Delete a todo
+Chapter 09: make a todo completed

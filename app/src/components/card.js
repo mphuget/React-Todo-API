@@ -35,6 +35,14 @@ const useStyles = makeStyles({
     return res;
   }
 
+  async function makePostRequest(url, newTitle, newDesc) {
+
+    let res = await axios.post(url, {});
+  
+    return res;
+  
+  }
+
 export default function CardTodo({todo, todos, setTodos}) {
 
     const classes = useStyles();
@@ -51,6 +59,11 @@ export default function CardTodo({todo, todos, setTodos}) {
 
             return item;
         }));
+
+        makePostRequest("http://localhost:3000/api/v1/todo/" + todo._id + "/done" )
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+
 
     };
 

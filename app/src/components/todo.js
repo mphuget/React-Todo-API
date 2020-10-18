@@ -1,6 +1,17 @@
 import React from 'react';
 import '../style/todo.css';
+import axios from 'axios';
 
+async function makePostRequest(url) {
+
+    let res = await axios.post(url, {
+      title: "Un Todo avec axios",
+      description: "Et sa superbe description"
+    });
+  
+    return res;
+  
+}
 
 function Todo({todos, addTodos, formData, updateFormData}) {
 
@@ -20,8 +31,11 @@ function Todo({todos, addTodos, formData, updateFormData}) {
             ...todos,
             {title:formData.title, description: formData.description, done : false, id: Math.ceil(Math.random() * 10000)}
         ])
-        // ... submit to API or something
 
+        // ... submit to API or something
+        makePostRequest('http://localhost:3000/api/v1/todo')
+        .then(( data ) => console.log(data))
+        .catch((err) => console.log(err))
     };
 
     return (
